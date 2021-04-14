@@ -35,7 +35,7 @@ To run the simulation simply type the name of the .m file in the Matlab command 
 
 >>BlueBrain_C19LIS
 
-or use the command line in a terminal window if not utilzing the Matlab gui workspace (>matlab BlueBrain_Covid19).
+or use the command line in a terminal window if not utilzing the Matlab gui workspace (>matlab BlueBrain_C19LIS).
 
 Use the Matlab workspace editor or an editor of your choice to modify the .m file for figure output,
 parameter adjustments, or other desired changes.
