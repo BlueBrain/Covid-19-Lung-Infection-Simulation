@@ -1,0 +1,1 @@
+Author of Covid-19 Lung Infection Simulator (C19-LIS) software: Jay Coggan, Molecular Systems, Blue Brain Project / EPFL (only author as of February, 2021)  
