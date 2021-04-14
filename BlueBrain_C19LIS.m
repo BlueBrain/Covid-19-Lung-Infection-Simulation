@@ -41,11 +41,9 @@ t = 0:5000000:10000000000 ; % msecs
 tmsecs = 0:5000000:1000000000 ; % msecs
 tsecs = 0:50000:10000000      ; % secs
 tmins = 0:833.3333:166666.667          ; % mins
-%tmins = 0:500:100000          ; % mins
 thrs =  0:13.8888:2777.7777            ;% hrs
-%thrs =  0:0.5:100            ;% hrs
 tdays = 0:0.5787:115.7407            ; % days
-%tdays = 0:0.5:100            ; % days
+
 
 %%%%%%% Independent variable sweeps %%%%%%%
 
@@ -53,7 +51,7 @@ gluc_b_range = 0:0.15:30  ; % mM, range of blood glucose, includes hyperglycemic
 lectin_range = 0:0.05:10    ; % mM, range of lectin concentration in ASL
 Rt_range = 0:1:100       ; % ohm*cm^2, paracellular resistivity, corresponds to glucose permeability (Garnett Baines 2012)
 
-viral_load = 0.0: 0.000001 : 0.0002 ;
+viral_load = 0.0: 0.000001 : 0.0002 ;% for range sims only
 
 %%%%%%% Fixed or Initial Parameters %%%%%%%
 
@@ -244,15 +242,6 @@ vinumber_epil = ACE2V_rl.*(2.^(vireprate_epil.*gluc_asl_r)).*tsecs; %
 vinumber_logl = log10(vinumber_epil) ; %
 
 
-%%%%%%%%%%%%%%%%%%%%% 3D graph input data %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%{
-Ta= gluc_asl_r  ; % ASL glucose 
-Ka = viral_load  ; % viral load
-[TTa KKa]=meshgrid(Ta,Ka)   ; %  
-ZZa= ACE2V_rl   ; % viral replication rate or virion number 
-
-%}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -313,7 +302,6 @@ xlim([0.2 2])
 
 
 
-
 figure (10)
 
 plot(tsecs/3600,c19./0.7,'k','linewidth',3)
@@ -323,7 +311,6 @@ xlim([0 240])
 ylim([0 1])
 title('SARS-CoV-2 "sneeze" stimulus and clearance')
  
-
 
 
 figure(11)    %
@@ -471,54 +458,10 @@ ylabel('log10(epithelial virus number)')
 
 
 
-%%%%%%%%%%%% 3D plots %%%%%%%%%%%%%%%%%%%%
-
-%{
-figure(20) 
-
-surf(TTa, KKa, ZZa)
-colormap default
-%colorbar('southoutside')
-shading interp
-xlabel('ASL glucose','fontsize',18)
-ylabel('viral load','fontsize',18)
-zlabel('SARS-CoV-2 ACE2 binding','fontsize',18)
-title('')
-axis square
-%}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
 
 figure(32)
-%{
-index1=find(gluc_asl_r>=0.4); %
-index1=index1(1); %
-value1=vireprate_epi(index1);
-
-index2=find(gluc_asl_r>=0.4); %
-index2=index2(1); %
-value2=vireprate_epib(index2);
-
-index3=find(gluc_asl_r>=0.4); %
-index3=index3(1); %
-value3=vireprate_epic(index3);
 
 
-index4=find(gluc_asl_r>=1.2); %
-index4=index4(1); %
-value4=vireprate_epi(index4);
-
-index5=find(gluc_asl_r>=1.2); %
-index5=index5(1); %
-value5=vireprate_epib(index5);
-
-index6=find(gluc_asl_r>=1.2); %
-index6=index6(1); %
-value6=vireprate_epic(index6);
-%}
 value1=interp1(gluc_asl_r,vireprate_epi,0.4);
 value2=interp1(gluc_asl_r,vireprate_epib,0.4);
 value3=interp1(gluc_asl_r,vireprate_epic,0.4);
@@ -539,38 +482,8 @@ xlabel('ASL glucose')
 ylabel('virus replication rate')
 
 
-
-
 figure(33)
 
-%{
-
-index1=find(gluc_asl_r>=0.4); %
-index1=index1(1); %
-value1=vinumber_epi(index1);
-
-index2=find(gluc_asl_r>=0.4); 
-index2=index2(1); %
-value2=vinumber_epib(index2);
-
-index3=find(gluc_asl_r>=0.4); %
-index3=index3(1); %
-value3=vinumber_epic(index3);
-
-
-index4=find(gluc_asl_r>=1.2); %
-index4=index4(1); %
-value4=vinumber_epi(index4);
-
-index5=find(gluc_asl_r>=1.2); %
-index5=index5(1); %
-value5=vinumber_epib(index5);
-
-index6=find(gluc_asl_r>=1.2); %
-index6=index6(1); %
-value6=vinumber_epic(index6);
-
-%}
 
 value1=interp1(gluc_asl_r,vinumber_epi,0.4);
 value2=interp1(gluc_asl_r,vinumber_epib,0.4);
@@ -598,5 +511,6 @@ ylabel('epithelial virus number')
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+disp('end ... but wait for the figures')
+disp('fin ... mais attendez les graphiques')
 
-disp('fin ...mais attendez les graphiques')
